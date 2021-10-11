@@ -27,8 +27,15 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*.mozilla.org/*"],
-      "js": ["borderify.js"]
+      "matches": [
+        "<all_urls>",
+      ],
+
+      "js": [
+        "libs/jquery-3.6.0.js",
+        "libs/jquery.js",
+        "borderify.js"
+      ]
     }
   ]
 

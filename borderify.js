@@ -10,6 +10,22 @@ async function notifyBackgroundPage(e) {
 
 }
 
+function VideoDetector(){
+	var video = $( "video" );
+	var element = $("#root");
+	var video_primary = $("#primary")
+
+	console.log(element);
+	console.log(video);
+	console.log(video_primary);
+
+	video.onplaying = function() { 
+		console.log('Video is now loaded and playing'); 
+	}
+}
+
+VideoDetector()
+
 window.addEventListener("click", notifyBackgroundPage);
 
 
