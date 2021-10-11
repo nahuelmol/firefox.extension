@@ -11,10 +11,13 @@
 		<video id="player" class="video-js"controls preload="auto" width="640"
     		height="264" poster="MY_VIDEO_POSTER.jpg" >
     		<source src="https://www126.sbcdnvideo.com/tysxf5nx5o66j6cdabbbxhccfti7mj6y5qi2tzqlmzedeqyp2ohqevexhq6q/tt2560140-1-1.mp4" type="video/mp4" />
-    		<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that<a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-    		</p>
+    		<track id="custom-caption" kind="captions" srclang="en" default />
   		</video>
 	</div>
+	<div id="subs-adder">
+		You can add subtitles from here
+	</div>
 	<script src="https://cdn.plyr.io/3.6.8/plyr.js"></script>
+	<script src="player.js" type="text/javascript"></script>
 </body>
 </html>
