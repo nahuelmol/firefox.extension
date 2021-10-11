@@ -29,6 +29,8 @@
     {
       "matches": [
         "<all_urls>",
+        "https://pelisplushd.net/*",
+        "https://www.youtube.com/*"
       ],
 
       "js": [
