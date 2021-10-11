@@ -4,7 +4,7 @@ document.getElementById('base').innerHTML = "Select video Link";
 
 function openTab(){
 	console.log("Button clicked!")
-	var myWindow = window.open("", "", "width=600,height=600"); 
+	var myWindow = window.open("player.html", "", "width=600,height=600"); 
 	document.getElementById('notify').innerHTML = "Opening video in other tab";
 }
 
