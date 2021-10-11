@@ -1,0 +1,35 @@
+{
+
+  "manifest_version": 2,
+  "name": "Borderify",
+  "version": "1.0",
+  "description": "Agrega un borde rojo a todas las páginas web de mozilla.org.",
+  "icons": {
+    "48": "icons/border-48.png"
+  },
+  "permissions": [
+    "tabs",
+    "clipboardWrite",
+    "storage",
+    "contextMenus",
+    "nativeMessaging",
+    "webRequest",
+    "notifications",
+    "<all_urls>"
+  ],
+  
+  "browser_action":{
+  	"default_icon": {
+    	"48": "icons/border-48.png"
+  	},
+  	"default_title": "Whereami?",
+  	"default_popup":"popup/index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.mozilla.org/*"],
+      "js": ["borderify.js"]
+    }
+  ]
+
+}
