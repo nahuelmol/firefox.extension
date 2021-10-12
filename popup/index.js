@@ -8,14 +8,6 @@ function openTab(){
 	document.getElementById('notify').innerHTML = "Opening video in other tab";
 }
 
-function SearchVideos(){
-	var links = [];
-
-	document.getElementById('notify').innerHTML = "searching links";
-	console.log('There I should get links from the current analized page');
-
-	return links;
-}
 
 function CreateLinks(){
 
@@ -47,6 +39,15 @@ function CreateLinks(){
 }
 
 
+browser.runtime.onMessage.addListener(
+  (data, sender) => {
+      document.getElementById('notify').innerHTML = "Message received";
+
+      if (data.type === 'handle_me') {
+        return Promise.resolve('done');
+      }
+      return false;
+  }
+);
 
 document.getElementById("OpenButton").addEventListener("click", openTab);
-document.getElementById("search_video_links").addEventListener("click", SearchVideos);

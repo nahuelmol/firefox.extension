@@ -39,6 +39,9 @@
         "borderify.js"
       ]
     }
-  ]
+  ],
+  "background": {
+   "scripts": ["background.js", "back2.js"]
+  }
 
 }

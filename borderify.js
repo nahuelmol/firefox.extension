@@ -1,5 +1,35 @@
 document.body.style.border = "5px solid red";
 
+async function SendMessageNow(){
+
+
+	function onError(error) {
+	  console.error(`Error: ${error}`);
+	}
+
+	function sendMessageToTabs(tabs) {
+  		for (let tab of tabs) {
+    		browser.tabs.sendMessage(
+      			tab.id,
+      			{greeting: "Hi from background script"}
+    		).then(response => {
+      			console.log("Message from borderify:");
+      			console.log(response.response);
+    		}).catch(onError);
+  		}
+	}
+
+	browser.tabs.query({
+    	currentWindow: true,
+    	active: true
+  	}).then(sendMessageToTabs).catch(onError);
+}
+
+function SendLinkToPopup(link){
+	console.log('sending link...');
+}
+
+
 async function notifyBackgroundPage(e) {
 	console.log("click! borderify");
 
@@ -10,21 +40,25 @@ async function notifyBackgroundPage(e) {
 
 }
 
-function VideoDetector(){
-	var video = $( "video" );
-	var element = $("#root");
-	var video_primary = $("#primary")
-
-	console.log(element);
-	console.log(video);
-	console.log(video_primary);
-
-	video.onplaying = function() { 
-		console.log('Video is now loaded and playing'); 
-	}
+function handleResponse(message) {
+  console.log(`Message from the background script:  ${message.response}`);
 }
 
-VideoDetector()
+function handleError(error) {
+  console.log(`Error: ${error}`);
+}
+
+function VideoLinkDetector(e){
+	var vid  = e.explicitOriginalTarget;
+	console.log('links ready to send');
+	var link  = vid.querySelector('source').src;
+	console.log(link);
+	
+	SendMessageNow()
+}
+
+const video = document.querySelector('video');
+video.addEventListener('play', VideoLinkDetector)
 
 window.addEventListener("click", notifyBackgroundPage);
 
