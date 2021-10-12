@@ -3,7 +3,7 @@ document.body.style.border = "5px solid red";
 async function SendMessageNow(link){
 
 	function handleResponse(message) {
-  		console.log(`Message to the background script:  ${message.response}`);
+  		console.log(`Response from background script:  ${message.response}`);
 	}
 
 	function handleError(error) {
@@ -12,6 +12,7 @@ async function SendMessageNow(link){
 
 	var sending = browser.runtime.sendMessage({
 		greeting:'HOLA',
+                type:'data_links',
 		links:[link]
 	})
 	sending.then(handleResponse, handleError)
