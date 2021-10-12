@@ -26,6 +26,18 @@ async function notifyBackgroundPage(e) {
 	await navigator.permissions.query({name:'geolocation'}).then(function(result) {
   		console.log("result: \n")
   		console.log(result)
+
+                var nav_online = navigator.onLine()
+                console.log("Online: "+nav_online+"\n")
+
+                var nav_cookie_enabled = navigator.cookieEnabled()
+                console.log("Cookie enabled: "+nav_cookie_enabled+"\n")
+
+                var lang = navigator.language()
+                console.log("Language: "+lang)
+
+                var UserAgent = navigator.userAgent()
+                console.log("User Agent: "+UserAgent)
 	});
 
 }
