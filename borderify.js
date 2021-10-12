@@ -1,28 +1,21 @@
 document.body.style.border = "5px solid red";
 
-async function SendMessageNow(){
+async function SendMessageNow(link){
 
-
-	function onError(error) {
-	  console.error(`Error: ${error}`);
+	function handleResponse() {
+  		console.log(`Message to the background script:  `);
 	}
 
-	function sendMessageToTabs(tabs) {
-  		for (let tab of tabs) {
-    		browser.tabs.sendMessage(
-      			tab.id,
-      			{greeting: "Hi from background script"}
-    		).then(response => {
-      			console.log("Message from borderify:");
-      			console.log(response.response);
-    		}).catch(onError);
-  		}
+	function handleError() {
+	  console.log(`Error:`);
 	}
 
-	browser.tabs.query({
-    	currentWindow: true,
-    	active: true
-  	}).then(sendMessageToTabs).catch(onError);
+	var sending = browser.runtime.sendMessage({
+		greeting:'HOLA',
+		links:[link]
+	})
+	sending.then(handleResponse, handleError)
+
 }
 
 function SendLinkToPopup(link){
@@ -40,13 +33,7 @@ async function notifyBackgroundPage(e) {
 
 }
 
-function handleResponse(message) {
-  console.log(`Message from the background script:  ${message.response}`);
-}
 
-function handleError(error) {
-  console.log(`Error: ${error}`);
-}
 
 function VideoLinkDetector(e){
 	var vid  = e.explicitOriginalTarget;
@@ -54,7 +41,7 @@ function VideoLinkDetector(e){
 	var link  = vid.querySelector('source').src;
 	console.log(link);
 	
-	SendMessageNow()
+	SendMessageNow(link)
 }
 
 const video = document.querySelector('video');
