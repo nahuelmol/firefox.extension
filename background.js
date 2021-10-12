@@ -12,7 +12,9 @@ browser.runtime.onMessage.addListener(
 
  	  if (data.type === 'get_array'){
  	  	return Promise.resolve(runtime_array);
- 	  }else{
+ 	  }
+          
+          if (data.type === 'data_links'){
  	  	console.log('receiving data from content script')
  	  	console.log('links received: ' + data.links)
 
