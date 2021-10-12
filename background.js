@@ -1,11 +1,24 @@
-console.log('background')
+console.log('background working...')
 
-console.log(browser.tabs)
+var runtime_array = []
 
 browser.runtime.onMessage.addListener(
-  	(data, sender) => {
-      //document.getElementById('notify').innerHTML = "Message received";
-      console.log('received')
- 	  console.log(data.greeting)
- 	  console.log(data.links)
+  	(data, sender, sendResponse) => {
+ 	  if (data.links != 'undefined'){
+ 	  	if(!runtime_array.includes(data.links)){
+ 	  		runtime_array.push(data.links)
+ 	  	}
+ 	  } 
+
+ 	  if (data.type === 'get_array'){
+ 	  	return Promise.resolve(runtime_array);
+ 	  }else{
+ 	  	console.log('receiving data from content script')
+ 	  	console.log('links received: ' + data.links)
+
+ 	  	sendResponse({
+ 	  		response:'Response from background: links received'
+ 	  	})
+ 	  }
+
 });

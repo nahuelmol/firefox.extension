@@ -2,12 +2,12 @@ document.body.style.border = "5px solid red";
 
 async function SendMessageNow(link){
 
-	function handleResponse() {
-  		console.log(`Message to the background script:  `);
+	function handleResponse(message) {
+  		console.log(`Message to the background script:  ${message.response}`);
 	}
 
-	function handleError() {
-	  console.log(`Error:`);
+	function handleError(error) {
+	  console.log(`Error: ${error}`);
 	}
 
 	var sending = browser.runtime.sendMessage({
@@ -16,10 +16,6 @@ async function SendMessageNow(link){
 	})
 	sending.then(handleResponse, handleError)
 
-}
-
-function SendLinkToPopup(link){
-	console.log('sending link...');
 }
 
 
