@@ -41,7 +41,7 @@
     }
   ],
   "background": {
-   "scripts": ["background.js", "back2.js"]
+   "scripts": ["back/background.js"]
   }
 
 }
