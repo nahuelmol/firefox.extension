@@ -1,7 +1,5 @@
-
 var toAdd;
 
-console.log("Chau");
 document.getElementById('base').innerHTML = "Select video Link";
 
 function DefinitiveLink(e){
@@ -25,16 +23,20 @@ function openTab(e){
    
    //There I want to make this link unique, this way it can be played without conflicts
 
-	console.log("Button clicked!")
+	console.log("Sending definitive link to be played!")
 	var myWindow = window.open("player/player.html", "", "width=600,height=600"); 
-	document.getElementById('notify').innerHTML = "Opening video in other tab";
+	document.getElementById('notify').innerHTML = "Please, now click on OpenPlayer for watching video!";
 }
 
 
 function CreateLinks(links){
    console.log('links')
-   console.log(links)
-	for(var i=0; i < links.length; i++){
+   
+   if(links === undefined){
+      document.getElementById('notify').innerHTML = 'undefined links in current page'
+      return console.log('Links undefined, imposible to work without a link')
+   }else{
+      for(var i=0; i < links.length; i++){
          
          var newDiv = document.createElement('div');
          newDiv.id = 'r'+i;
@@ -59,6 +61,7 @@ function CreateLinks(links){
          newDiv.appendChild(target);
          scroll_div.appendChild(text);
       }
+   }
 
 	document.getElementById('sel').appendChild(toAdd);
 }
@@ -73,7 +76,7 @@ function TreatingResponse(response){
       }
    }
 
-   if((current == 'undefined') || (current == '')){
+   if((current == undefined) || (current == '')){
       console.log('It is not posible to end the action without links')
    }else{
       toAdd = document.createDocumentFragment();
@@ -86,6 +89,4 @@ const arrayData = browser.runtime.sendMessage({type: 'get_array'});
 arrayData.then(TreatingResponse)
 
 document.getElementById("OpenButton").addEventListener("click", openTab);
-
-var userSelection = document.getElementsByClassName("btns");
 
