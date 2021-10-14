@@ -1,7 +1,11 @@
 
 var toAdd;
 
-function MAKE(){
+function _add_caption_title(){
+	
+}
+
+function _add_caption_file(){
 
 }
 
@@ -13,14 +17,14 @@ function CreateOptions(){
 	var online_sub = document.createElement('BUTTON');
 	oneline_sub.id = 'btn_sub1';
     oneline_sub.className = 'btn_sub';
-    oneline_sub.innerHTML = 'ADD';
-    oneline_sub.onclick = MAKE;
+    oneline_sub.innerHTML = 'ADD FILE';
+    oneline_sub.onclick = _add_caption_file;
 
     var local_sub = document.createElement('BUTTON');
 	local_sub.id = 'btn_sub2';
 	local_sub.className = 'btn_sub';
-	local_sub.innerHTML = 'ADD';
-	local_sub.onclick = MAKE;
+	local_sub.innerHTML = 'ADD TITLE';
+	local_sub.onclick = _add_caption_title;
 
 	ButtonSet.appendChild(online_sub)
 	ButtonSet.appendChild(local_sub)
