@@ -1,18 +1,20 @@
 console.log('background working...')
 
+
+const tabs = {};
 var runtime_array = []
 var definitive_link;
 
+chrome.tabs.onRemoved.addListener(tabId => delete tabs[tabId]);
+
+
 browser.runtime.onMessage.addListener(
   	(data, sender, sendResponse) => {
- 	  if (data.links != 'undefined'){
- 	  	if(!runtime_array.includes(data.links)){
- 	  		runtime_array.push(data.links)
- 	  	}
- 	  } 
 
- 	  if (data.type === 'get_array'){
- 	  	return Promise.resolve(runtime_array);
+ 	  if (data.type === 'get_links'){
+ 	  	sendResponse({
+ 	  		links:runtime_array
+ 	  	})
  	  }
 
  	  if (data.type === 'ask_link'){
@@ -37,3 +39,29 @@ browser.runtime.onMessage.addListener(
  	  }
 
 });
+
+
+chrome.webRequest.onHeadersReceived.addListener(d => {
+
+	if((d.type === 'media') || (d.type === 'xmlhttprequest')){
+		var link = d.url;
+		var tab_id = d.tabId;
+		var status_code = d.statusCode;
+
+		if((link.endsWith('.mp4')) && (status_code === 200)){
+
+			runtime_array.push(link)
+
+			console.log('request\'s target: ', link)
+  			console.log('status:',d.statusCode)
+  			console.log('method',d.method)
+		}
+	} 
+
+
+
+
+}, {
+  urls: ['*://*/*'],
+  types: ['main_frame', 'other', 'xmlhttprequest', 'media']
+}, ['responseHeaders']);

@@ -67,25 +67,25 @@ function CreateLinks(links){
 }
 
 function TreatingResponse(response){
-   var current = response[0]
+   console.log(response)
 
-   for(var each in response){
-      if(response[each] == 'undefined'){
-         response.splice(each)
-         console.log(response[each])
+   if((response == undefined) || (response === '')){
+      return console.log('It is not posible to end the action without links')
+   }
+
+   for(var each of response.links){
+      if(each == undefined){
+         response.links.splice(each)
+         console.log(each + ' is undefined')
       }
    }
 
-   if((current == undefined) || (current == '')){
-      console.log('It is not posible to end the action without links')
-   }else{
-      toAdd = document.createDocumentFragment();
-      CreateLinks(current)
-   }
+   toAdd = document.createDocumentFragment();
+   CreateLinks(response.links)
 }
 
 
-const arrayData = browser.runtime.sendMessage({type: 'get_array'});
+const arrayData = browser.runtime.sendMessage({type: 'get_links'});
 arrayData.then(TreatingResponse)
 
 document.getElementById("OpenButton").addEventListener("click", openTab);

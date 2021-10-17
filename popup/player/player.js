@@ -1,5 +1,4 @@
 
-var toAdd;
 
 function _add_caption_title(){
 	
@@ -42,14 +41,22 @@ function CustomSubs(){
     CreateOptions()
 }
 
+
 function SettingSrc(response){
-	var Source = document.getElementById('source_id');
+	var source = document.getElementById('source_id')
 
-	console.log(response)
-	console.log(Source)
+	console.log(source)
+	var src = document.createAttribute('src')
 
-	Source.setAttribute('src', response)
-	console.log(Source)
+	src.value = response;
+	source.setAttributeNode(src);
+
+	var video = document.getElementById('player')
+	
+	console.log(source)
+
+	video.load()
+	video.play()
 }
 
 const arrayData = browser.runtime.sendMessage({type: 'ask_link'});

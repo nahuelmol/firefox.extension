@@ -17,7 +17,11 @@
     "notifications",
     "<all_urls>"
   ],
-  
+  "page_action":{
+    "default_icon": {
+      "48": "icons/border-48.png"
+    }
+  },
   "browser_action":{
   	"default_icon": {
     	"48": "icons/border-48.png"
@@ -25,23 +29,12 @@
   	"default_title": "Whereami?",
   	"default_popup":"popup/index.html"
   },
-  "content_scripts": [
-    {
-      "matches": [
-        "<all_urls>",
-        "https://pelisplushd.net/*",
-        "https://www.youtube.com/*"
-      ],
-
-      "js": [
-        "libs/jquery-3.6.0.js",
-        "libs/jquery.js",
-        "borderify.js"
-      ]
-    }
-  ],
   "background": {
-   "scripts": ["back/background.js"]
+   "scripts": [
+      "back/background.js",
+      "libs/jquery-3.6.0.js",
+      "libs/plyr.js"
+    ]
   }
 
 }

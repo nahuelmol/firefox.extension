@@ -12,13 +12,14 @@ async function SendMessageNow(link){
 
 	var sending = browser.runtime.sendMessage({
 		greeting:'HOLA',
-                type:'data_links',
+        type:'no_one',
 		links:[link]
 	})
 	sending.then(handleResponse, handleError)
 
 }
 
+SendMessageNow('link')
 
 async function notifyBackgroundPage(e) {
 	console.log("click! borderify");
@@ -54,8 +55,10 @@ function VideoLinkDetector(e){
 }
 
 const video = document.querySelector('video');
-video.addEventListener('play', VideoLinkDetector)
+//video.addEventListener('play', VideoLinkDetector)
+//
+//window.addEventListener("click", notifyBackgroundPage);
 
-window.addEventListener("click", notifyBackgroundPage);
-
+var select = document.querySelector('select');
+console.log()
 
