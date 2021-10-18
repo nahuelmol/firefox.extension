@@ -51,7 +51,7 @@ function SettingSrc(response){
 	src.value = response;
 	source.setAttributeNode(src);
 
-	var video = document.getElementById('player')
+	var video = document.querySelector('video')
 	
 	console.log(source)
 
@@ -62,4 +62,4 @@ function SettingSrc(response){
 const arrayData = browser.runtime.sendMessage({type: 'ask_link'});
 arrayData.then(SettingSrc)
 
-document.getElementById("subs-adder").addEventListener("click", CustomSubs);
+//document.getElementById("subs-adder").addEventListener("click", CustomSubs);

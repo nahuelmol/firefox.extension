@@ -1,6 +1,6 @@
 var toAdd;
 
-document.getElementById('base').innerHTML = "Select video Link";
+document.getElementById('base').innerHTML = "Search links and Select one";
 
 function DefinitiveLink(e){
 
@@ -20,12 +20,9 @@ function DefinitiveLink(e){
 }
 
 function openTab(e){
-   
-   //There I want to make this link unique, this way it can be played without conflicts
 
 	console.log("Sending definitive link to be played!")
 	var myWindow = window.open("player/player.html", "", "width=600,height=600"); 
-	document.getElementById('notify').innerHTML = "Please, now click on OpenPlayer for watching video!";
 }
 
 
@@ -84,9 +81,11 @@ function TreatingResponse(response){
    CreateLinks(response.links)
 }
 
+function SearchVideoLink(){
+   const arrayData = browser.runtime.sendMessage({type: 'get_links'});
+   arrayData.then(TreatingResponse)
+}
 
-const arrayData = browser.runtime.sendMessage({type: 'get_links'});
-arrayData.then(TreatingResponse)
-
+document.getElementById("search_video_links").addEventListener("click", SearchVideoLink);
 document.getElementById("OpenButton").addEventListener("click", openTab);
 

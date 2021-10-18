@@ -43,22 +43,15 @@ browser.runtime.onMessage.addListener(
 
 chrome.webRequest.onHeadersReceived.addListener(d => {
 
-	if((d.type === 'media') || (d.type === 'xmlhttprequest')){
-		var link = d.url;
-		var tab_id = d.tabId;
-		var status_code = d.statusCode;
+    if(d.statusCode === 302){
+    	console.log('REDIRECTOR')
+    	console.log('red: ',d.url)
+    }
 
-		if((link.endsWith('.mp4')) && (status_code === 200)){
-
-			runtime_array.push(link)
-
-			console.log('request\'s target: ', link)
-  			console.log('status:',d.statusCode)
-  			console.log('method',d.method)
-		}
-	} 
-
-
+    if(d.statusCode === 206){
+    	console.log("FILE: ", d.url)
+    	runtime_array.push(d.url)
+    }
 
 
 }, {
