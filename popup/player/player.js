@@ -43,23 +43,21 @@ function CustomSubs(){
 
 
 function SettingSrc(response){
+
 	var source = document.getElementById('source_id')
 
-	console.log(source)
 	var src = document.createAttribute('src')
 
-	src.value = response;
+	src.value = response.link;
 	source.setAttributeNode(src);
 
 	var video = document.querySelector('video')
 	
-	console.log(source)
-
 	video.load()
 	video.play()
 }
 
-const arrayData = browser.runtime.sendMessage({type: 'ask_link'});
+const arrayData = browser.runtime.sendMessage({type: 'player_ask_link'});
 arrayData.then(SettingSrc)
 
 //document.getElementById("subs-adder").addEventListener("click", CustomSubs);

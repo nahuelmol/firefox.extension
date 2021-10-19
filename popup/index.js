@@ -2,13 +2,33 @@ var toAdd;
 
 document.getElementById('base').innerHTML = "Search links and Select one";
 
+function ClearRemoteData(){
+
+   var SEL = document.querySelector('#sel')
+   var cada = SEL.childNodes
+
+   cada.forEach(each => {
+      each.remove()
+   })
+
+   var REQUEST = {
+      type:'clear_data'
+   }
+
+   function call(response){
+      console.log(response.status);
+   }
+
+   var sending = browser.runtime.sendMessage(REQUEST)
+   sending.then(call)
+}
+
 function DefinitiveLink(e){
 
    var BTN = e.explicitOriginalTarget;
    var PARENT = BTN.parentNode;
    var TEXT = PARENT.firstChild.firstChild.innerHTML;
    console.log('setting definitive link')
-   console.log(TEXT)
 
    var REQUEST = {
       type: 'set_link',
@@ -16,18 +36,25 @@ function DefinitiveLink(e){
       link_to: TEXT
    }
 
-   const arrayData = browser.runtime.sendMessage(REQUEST);
+   var arrayData = browser.runtime.sendMessage(REQUEST);
+   arrayData.then(response => {
+      console.log(response.status)
+   })
 }
 
 function openTab(e){
-
-	console.log("Sending definitive link to be played!")
 	var myWindow = window.open("player/player.html", "", "width=600,height=600"); 
 }
 
 
 function CreateLinks(links){
-   console.log('links')
+
+   var SEL = document.querySelector('#sel')
+   var cada = SEL.childNodes
+
+   cada.forEach(each => {
+      each.remove()
+   })
    
    if(links === undefined){
       document.getElementById('notify').innerHTML = 'undefined links in current page'
@@ -43,7 +70,7 @@ function CreateLinks(links){
          var target = document.createElement('BUTTON');
          target.id = 'btn'+i;
          target.className = 'btns';
-         target.innerHTML = 'open link';
+         target.innerHTML = 'set link';
          target.onclick = DefinitiveLink;
 
          var scroll_div = document.createElement('div');
@@ -60,7 +87,7 @@ function CreateLinks(links){
       }
    }
 
-	document.getElementById('sel').appendChild(toAdd);
+	SEL.appendChild(toAdd);
 }
 
 function TreatingResponse(response){
@@ -82,10 +109,10 @@ function TreatingResponse(response){
 }
 
 function SearchVideoLink(){
-   const arrayData = browser.runtime.sendMessage({type: 'get_links'});
+   var arrayData = browser.runtime.sendMessage({type: 'get_links'});
    arrayData.then(TreatingResponse)
 }
 
 document.getElementById("search_video_links").addEventListener("click", SearchVideoLink);
 document.getElementById("OpenButton").addEventListener("click", openTab);
-
+document.getElementById("_clear_").addEventListener("click", ClearRemoteData);
