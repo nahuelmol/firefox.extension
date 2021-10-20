@@ -26,8 +26,8 @@
   	"default_icon": {
     	"48": "icons/border-48.png"
   	},
-  	"default_title": "Whereami?",
-  	"default_popup":"popup/index.html"
+  	"default_title": "Check link!",
+  	"default_popup":"popup/popup.html"
   },
   "background": {
    "scripts": [

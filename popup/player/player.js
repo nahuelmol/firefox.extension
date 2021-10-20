@@ -1,14 +1,16 @@
 
 
 function _add_caption_title(){
-	
+	console.log('add caption title')
 }
 
 function _add_caption_file(){
-
+	console.log('add caption file')
 }
 
-function CreateOptions(){
+function CreateOptions(toAdd){
+
+	var ADDER = document.getElementById('subs-adder')
 
 	var ButtonSet = document.createElement('div')
 	ButtonSet.id = 'button_set' 
@@ -29,23 +31,22 @@ function CreateOptions(){
 	ButtonSet.appendChild(local_sub)
 
 	toAdd.appendChild(ButtonSet)
+
+	ADDER.appendChild(toAdd)
 }
 
 function CustomSubs(){
-	document.getElementById('custom-caption').createAttribute("src", "url.vtt")
-	document.getElementById('custom-caption').createAttribute("label", "English")
-
 	console.log("accessing to set subs");
 
-	toAdd = document.createDocumentFragment();
-    CreateOptions()
+	var toAdd = document.createDocumentFragment();
+
+    CreateOptions(toAdd)
 }
 
 
 function SettingSrc(response){
 
 	var source = document.getElementById('source_id')
-
 	var src = document.createAttribute('src')
 
 	src.value = response.link;
@@ -60,4 +61,4 @@ function SettingSrc(response){
 const arrayData = browser.runtime.sendMessage({type: 'player_ask_link'});
 arrayData.then(SettingSrc)
 
-//document.getElementById("subs-adder").addEventListener("click", CustomSubs);
+document.getElementById("adder").addEventListener("click", CustomSubs);
