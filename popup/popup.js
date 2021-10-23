@@ -109,7 +109,11 @@ function TreatingResponse(response){
 }
 
 function SearchVideoLink(){
-   var arrayData = browser.runtime.sendMessage({type: 'get_links'});
+   var REQUEST = {
+      type:'get_links',
+      tabId:'putCurrentTabId'
+   }
+   var arrayData = browser.runtime.sendMessage(REQUEST);
    arrayData.then(TreatingResponse)
 }
 
