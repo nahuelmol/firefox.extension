@@ -76,6 +76,14 @@ chrome.webRequest.onHeadersReceived.addListener(d => {
         console.log('This media content is unrecognizable')
       }
     }
+  }else if(d.type === 'xmlhttprequest'){
+    console.log('trying to identify dash manifest')
+   
+    if(d.url.endsWith('.mpd')){
+        if(!runtime_array.includes(d.url)){
+            runtime_array.push()
+        }
+    }
   }
     
 }, {
